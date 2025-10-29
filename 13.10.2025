@@ -1,0 +1,75 @@
+1.Reversing the array...
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static void reverseArray(ArrayList<Integer> arr, int m)
+    {
+        // Write your code here.
+        int n=arr.size();
+
+        Collections.reverse(arr.subList(m+1,n));
+        
+    }
+}
+
+2.finding maximum and minimum elements
+
+class Solution {
+    public int minimumDeletions(int[] nums) {
+        int min=Integer.MAX_VALUE,max=Integer.MIN_VALUE,mi=-1,mj=-1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]<min){
+                min=nums[i];
+                mi=i;
+            }
+            if(nums[i]>max)
+{
+   max=nums[i];
+   mj=i;
+}     
+   }
+    int front=Math.max(mi,mj)+1;
+    int back=nums.length-Math.min(mi,mj);
+    int both=Math.min(mi+1+(nums.length-mj),mj+1+(nums.length-mi));
+    return Math.min(both,Math.min(front,back));
+    }
+}
+
+3.Running sum of 1d Array
+
+class Solution {
+    public int[] runningSum(int[] nums) {
+        int n=nums.length;
+        int sum=0;
+        int[] ans=new int[n];
+        for(int i=0;i<n;i++)
+        {
+          sum+=nums[i];
+          ans[i]=sum;
+        }
+        return ans;
+    }
+}
+
+4. count elements with maximum frequency
+class Solution {
+    public int maxFrequencyElements(int[] nums) {
+        int[] arr=new int[101];
+        int max=0,res=0;
+        for(int n:nums){
+            int f= ++arr[n];
+            if(f>max) {
+                max=f;
+                res=f;
+            }
+            else if(f==max) res+=f;
+        }
+        return res;
+    }
+}
+
+5. left/right rotate an array by k positions.
+  
