@@ -146,3 +146,47 @@ class Solution {
         return ans;
     }
 }
+
+9.INTERSECTION OF TWO ARRAYS
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+    HashSet<Integer> set=new HashSet<>();
+    ArrayList<Integer> arr=new ArrayList<>();
+    for(int i=0;i<nums1.length;i++){
+        set.add(nums1[i]);
+    }
+    for(int i=0;i<nums2.length;i++){
+    if(set.contains(nums2[i])){
+        arr.add(nums2[i]);
+        set.remove(nums2[i]);
+    }
+    }
+    int[] ans=new int[arr.size()];
+    for(int i=0;i<arr.size();i++){
+        ans[i]=arr.get(i);
+    }
+    return ans;
+
+    
+        }
+}
+
+10.MAXIMUM SUBARRAY
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int sum=0,maxi=nums[0];
+        for(int i=0;i<nums.length;i++){
+            sum=sum+nums[i];
+            maxi=max(maxi,sum);
+            if(sum<0){
+                sum=0;
+            }
+        }
+        return maxi;
+    }
+    public int max(int a,int b){
+        return (a > b) ? a : b;
+        }
+    }
