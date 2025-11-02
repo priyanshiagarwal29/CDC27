@@ -85,3 +85,32 @@ class Solution {
           
     }
 }
+
+6.REMOVE DUPLICATES FROM THE SORTED ARRAY
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums.length ==1) return 1;
+        if (nums.length == 0) return 0;
+
+        int i=1;
+
+        for(int j=1;j<nums.length;j++){
+            if(nums[j]!=nums[j-1]){
+               nums[i]=nums[j];
+              i++; 
+            }
+        }
+            return i; 
+    }
+}
+
+7.Find all repeating elements in an array
+
+public void remove(int[] arr){
+HashMap<Integer,Integer> map=new HashMap<>()
+for(int n:arr) map.put(n,map.getOrDefault(n,0)+1);
+for(Entry<Integer,Integer> entry:map.entrySet()){
+if(entry.getValue()>1) Sop(entry.getKey());
+}
+}
