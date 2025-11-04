@@ -20,3 +20,55 @@ public static void frequency(String str)
   }
   }
   
+2.MAX OCCURING CHARACTER
+
+char Max(String s) {
+        char[] arr = s.toCharArray();
+        Arrays.sort(arr);
+        int maxF = 1, currF = 1;
+        char ans = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] == arr[i - 1]) {
+                currF++;
+            } 
+            else {
+                if (currF > maxF) {
+                    maxF = currF;
+                    ans = arr[i - 1];
+                }
+                currF = 1;
+            }
+        }
+        if (currF> maxF) {
+            maxF= currF;
+            ans = arr[arr.length - 1];
+        }
+        return ans;
+    }
+
+3.REMOVE DUPLICATES FROM A STRING
+
+String remove(String s){
+HashSet<Character> set=new HashSet<>();
+StringBuilder st=new StringBuilder();
+for(char c:s.toCharArray()){
+if(!set.contains(c)){
+set.add(c);
+st.append(c);
+}
+}
+return st.toString();
+}
+
+4.Count the number of words in a given string
+int words(String s){
+int w=0;
+for(char c:s.toCharArray()){
+if(c==' ') w++;
+}
+return w+1;
+}
+
+5.FACTORIAL OF A NUMBER
+
+
