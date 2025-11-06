@@ -1,0 +1,222 @@
+2.DELETE NODE IN A LINKED LIST
+
+class Solution {
+    public void deleteNode(ListNode node) {
+        node.val=node.next.val;
+        node.next=node.next.next;
+    }
+}
+
+3.SEARCH IN A LINKED LIST
+
+boolean search(Node head,int target){
+if(head ==null) return false;
+if(head.val == target) return true;
+Node temp=head;
+while(temp !=null){
+if(temp.val == target) return true;
+temp=temp.next;
+}
+return false;
+}
+
+4.FIND LENGTH OF A LINKED LIST
+
+class Solution {
+    public int getCount(Node head) {
+        // code here
+        Node temp=head;
+        int l=0;
+        while(temp!= null){
+            l++;
+            temp=temp.next;
+        }
+        return l;
+    }
+}
+
+5.REVERSE A LINKED LIST
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode curr=head ;
+        ListNode prev=null ;
+        ListNode temp;
+        while(curr != null){
+         temp=curr.next;
+         curr.next=prev;
+         prev=curr;
+         curr=temp;
+
+          }
+        return prev;
+        
+    }
+}
+
+6.MIDDLE OF A LINKED LIST
+
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode temp=head;
+        int c=0;
+        while(temp !=null){
+            c++;
+            temp=temp.next;
+        }
+        temp=head;
+            for(int i=0;i<c/2;i++)
+            {
+              temp=temp.next;
+            }
+             return temp;
+        }
+        
+    }
+
+7.MERGE TWO SORTED LIST
+
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode ls=new ListNode();
+        ListNode head=ls;
+      
+        while(list1 != null && list2 != null){
+            if(list1.val<=list2.val){
+                head.next=list1;
+                list1=list1.next;
+            }
+            else{
+                head.next=list2;
+                list2=list2.next;
+            }
+            head= head.next;
+         }
+        head.next = (list1 != null) ? list1 : list2;
+
+         
+         return ls.next;
+    }
+}
+
+8.ADD TWO NUMBERS
+
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummy=new ListNode(0);
+        ListNode tail=dummy;
+        int carry=0;
+        int sum=0;
+        while(l1 !=null && l2 !=null){
+            sum=l1.val+l2.val+carry;
+            carry=sum/10;
+            sum=sum%10;
+            ListNode newnode=new ListNode(sum);
+            tail.next=newnode;
+            tail=tail.next;
+            l1=l1.next;
+            l2=l2.next;
+        }
+        while(l1 !=null){
+            sum=l1.val+carry;
+            carry=sum/10;
+            sum=sum%10;
+            ListNode newnode=new ListNode(sum);
+            tail.next=newnode;
+            tail=tail.next;
+            l1=l1.next;
+        }
+        while(l2 !=null){
+            sum=l2.val+carry;
+            carry=sum/10;
+            sum=sum%10;
+            ListNode newnode=new ListNode(sum);
+            tail.next=newnode;
+            tail=tail.next;
+            l2=l2.next;
+        }
+        if(carry>0) tail.next = new ListNode(carry);
+       return dummy.next;
+    }
+}
+
+10.REMOVE DUPLICATES FROM A SORTED LIST
+
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode temp=head;
+        while(temp != null  && temp.next != null){
+            if(temp.val == temp.next.val){
+                temp.next=temp.next.next;
+            }
+            else{
+                temp=temp.next;
+            }
+            
+        }
+        return head;
+    }
+}
+
+12.NEXT GREATER ELEMENT1
+
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] arr=new int[nums1.length];
+        Arrays.fill(arr,-1);
+        for(int i=0;i<nums1.length;i++){
+            for(int j=0;j<nums2.length;j++){
+                if(nums1[i]==nums2[j]){
+                  for(int k=j+1;k<nums2.length;k++){
+                       if(nums2[k]>nums2[j])
+                    {
+                       arr[i]=nums2[k] ;    
+                       break;
+                       }
+                   
+                  }}
+                 
+                
+    }
+        }
+    return arr;
+}
+}
+
+13.SMALLER ON LEFT
+
+
+14.VALID PARANTHESIS
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack=new Stack<>();
+        char[] ch=s.toCharArray();
+        for(char c:ch){
+            if(c == '{' || c =='[' || c =='('){
+                stack.push(c);
+            }
+            else{
+                if(stack.isEmpty()){
+                    return false;
+                }
+                else {
+                    char top=stack.peek();
+                    if((top =='{' && c=='}') ||(top =='[' && c==']') || ( top =='(' && c==')'))  {
+                        stack.pop();
+                    }   
+                    else{
+                        return false;
+                    }
+                    }         
+                    }
+                    
+            }
+              return stack.isEmpty();
+  
+    }
+}
+1.DESIGN LINKED LIST
+9.ROTATE LIST
+11.IMPLEMENT STACK USING ARRAY
+15.POSTFIX EVALUATION
