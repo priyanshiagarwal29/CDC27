@@ -1,0 +1,183 @@
+1.DIAMTER OF A TREE
+
+class Solution {
+    int ans=0;
+    public int height(TreeNode root){
+        if(root == null) return 0;
+        int LH=height(root.left);
+        int RH=height(root.right);
+        ans=Math.max(ans,LH+RH);
+        return Math.max(LH,RH)+1;
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+        height(root);
+        return ans;
+    }
+}
+
+2.PATH SUM
+
+class Solution {
+    public boolean solve(int sum,TreeNode root,int targetSum){
+        if(root ==null) return false;
+        if(root.left ==null && root.right ==null) return sum+root.val==targetSum;
+        boolean left=solve(sum+root.val,root.left,targetSum);
+        boolean right=solve(sum+root.val,root.right,targetSum);
+        return left || right;
+    }
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+       return solve(0,root,targetSum);
+    }
+}
+
+3.VALID BST
+
+class Solution {
+    public boolean isvalid(TreeNode root,Integer left,Integer right){
+        if(root==null) return true;
+        
+        if( left !=null && root.val<=left) return false;
+        if(right !=null && root.val>=right) return false;
+        boolean lefts=isvalid(root.left,left,root.val);
+        boolean rights= isvalid(root.right,root.val,right);
+        return lefts && rights;
+    }
+    public boolean isValidBST(TreeNode root) {
+        return isvalid(root,null,null);
+    }
+}
+
+4.TWO SUM
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+       
+        for(int i=0;i<nums.length;i++){
+            int need=target-nums[i];
+            if(map.containsKey(need)){
+                return new int[]{map.get(need),i};
+            }
+            map.put(nums[i],i);
+        }
+        return new int[]{};
+    }
+}
+
+5.FREQUENCY OF CHARACTER
+
+class Solution {
+    public char getMaxOccuringChar(String s) {
+
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (char ch : s.toCharArray()) {
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+
+        int max = 0;
+        char ans = ' ';
+
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            int freq = entry.getValue();
+            char key = entry.getKey();
+            if (freq > max) {
+                max = freq;
+                ans = key;
+            } else if (freq == max && key < ans) {
+                ans = key;
+            }
+        }
+
+        return ans;
+    }
+}
+
+6.MISSING NUMBER
+
+class Solution {
+    public int missingNumber(int[] nums) {
+        HashSet<Integer> set=new HashSet<>();
+        for(int num:nums){
+            set.add(num);
+        }
+        int i=0;
+       while(set.contains(i)){
+        i++;
+       }
+       return i;
+    }
+}
+
+7.INTERSECTION OF TWO ARRAYS
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+    HashSet<Integer> set=new HashSet<>();
+    ArrayList<Integer> arr=new ArrayList<>();
+    for(int i=0;i<nums1.length;i++){
+        set.add(nums1[i]);
+    }
+    for(int i=0;i<nums2.length;i++){
+    if(set.contains(nums2[i])){
+        arr.add(nums2[i]);
+        set.remove(nums2[i]);
+    }
+    }
+    int[] ans=new int[arr.size()];
+    for(int i=0;i<arr.size();i++){
+        ans[i]=arr.get(i);
+    }
+    return ans;
+        }
+}
+
+8.SET MATRIX ZERO
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        HashSet<Integer> row=new HashSet<>();
+        HashSet<Integer> col=new HashSet<>();
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    row.add(i);
+                    col.add(j);
+                }
+            }
+        }
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(row.contains(i) || col.contains(j)){
+                    matrix[i][j]=0;
+                }
+            }
+    }
+}
+}
+
+9.VALID ANAGRAM
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length()){
+            return false;
+        }
+        int freq[]=new int[26];
+        for(int i=0;i<s.length();i++){
+            freq[s.charAt(i)-'a']++;
+        }
+        int freq1[]=new int [26];
+        for(int i=0;i<t.length();i++){
+            freq1[t.charAt(i)-'a']++;
+        }
+        if(Arrays.equals(freq,freq1)){
+           return true;
+        }
+        return false;
+    }
+}
+
+print left/right view of Binary tree
+Implementation of BST
+Design HashMap
+
