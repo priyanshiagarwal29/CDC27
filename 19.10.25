@@ -1,0 +1,71 @@
+1.LONGEST CONSECUTIVE SUBSEQUENCE
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        HashSet<Integer> set=new HashSet<>();
+        for(int n:nums)
+            set.add(n);
+        int l=0,ans=0,num;
+        for(int n:set){
+            if(!set.contains(n-1)){
+                l=0;       
+                num=n;
+                while(set.contains(num++))
+                l++;
+            }
+           ans=Math.max(l,ans);
+        }
+        return ans;
+    }
+}
+
+2.LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int max=0,len=0,j=0;
+        HashSet<Character> set=new HashSet<>();
+        for(int i=0;i<s.length();i++){
+              while(set.contains(s.charAt(i))){
+                set.remove(s.charAt(j));
+                j++;
+              }
+              set.add(s.charAt(i));
+              len=i-j+1;
+              max=Math.max(len,max);
+
+        }
+        return max;
+    }
+}
+
+3.length of largest subarray with contiguous element
+
+class Solution {
+    public int findMaxLength(int[] nums) {
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==0) nums[i]=-1;
+        }
+        int sum=0,max=0;
+        HashMap<Integer,Integer> map=new HashMap<>();
+        map.put(0,-1);
+        for(int i=0;i<nums.length;i++){
+            sum+=nums[i];
+            if(map.containsKey(sum)){
+             int last=map.get(sum);
+             max=Math.max(max,i-last);
+            }
+            else{
+                map.put(sum,i);
+            }
+        }
+        return max;
+    }
+}
+
+4.
+
+bulls and cows
+largest subarray with 0 sum
+count of zero sum subarray
+Implementation of Priority queue
