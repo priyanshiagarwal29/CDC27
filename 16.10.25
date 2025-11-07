@@ -66,4 +66,126 @@ class Solution {
     }
 }
 
-3.
+3.TWO SUM
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+       
+        for(int i=0;i<nums.length;i++){
+            int need=target-nums[i];
+            if(map.containsKey(need)){
+                return new int[]{map.get(need),i};
+            }
+            map.put(nums[i],i);
+        }
+        return new int[]{};
+    }
+}
+
+4.BEST TIME TO SELL STOCK
+class Solution {
+    public int maxProfit(int[] prices) {
+        int min=Integer.MAX_VALUE,max=0;
+        for(int i: prices){
+            if(min> i){
+                min=i;
+            }
+            else{
+                max=Math.max(max,i-min);
+            }
+
+        }
+        return max;
+    }
+}
+
+5.SORT COLOR
+class Solution {
+    public void swap(int[] nums, int a, int b) {
+    int temp = nums[a];
+    nums[a] = nums[b];
+    nums[b] = temp;
+    }
+
+    public void sortColors(int[] nums) {
+        // i ko hum 0 ke liye position allot karenge and j ko for 2 and k ko swap ke liye use kiya   hai which will swap the current element ot either i or j
+        int i=0,j=nums.length-1,k=0;
+        while(k<=j){
+            if(nums[k]==0){
+                swap(nums,k,i);
+                i++;
+                k++;
+            }
+            else if(nums[k]==1) k++;
+            else if(nums[k]==2){
+                swap(nums,k,j);
+                j--;
+            }
+        }
+    }
+}
+
+6.CONTAINER WITH MOST WATER
+class Solution {
+    public int maxArea(int[] height) {
+        // we need to move that pointer forward whose height is minimum becoz if we did the other one the minimun will still be small
+        int i=0;int j=height.length-1;
+        int max=0;
+        while(i<j){
+          int s=Math.min(height[i],height[j]);
+          int area=s*(j-i);
+          max=Math.max(max,area);
+          if(height[i]<=height[j]) i++;
+          else if(height[i]>height[j]) j--;
+        }
+        return max;
+    }
+}
+7.TRAPPING RAINWATER
+class Solution {
+    public int trap(int[] height) {
+        int[] l=new int[height.length];
+       int[] r=new int[height.length];
+       int[] d=new int[height.length];
+      l[0]=height[0];
+      r[height.length-1]=height[height.length-1];
+        int s=0;
+        for(int i=1;i<height.length;i++){
+               l[i]=Math.max(l[i-1],height[i]);
+            }   
+            for(int i=height.length-2;i>0;i--){
+                r[i]=Math.max(r[i+1],height[i]);    
+            }
+        for(int i=0;i<height.length;i++){
+           d[i]=Math.min(r[i],l[i]);
+        }
+       for(int i=0;i<height.length;i++){
+        if(d[i]>height[i]){
+            s+=d[i]-height[i];
+        }
+       }
+       return s;
+    }
+}
+
+8.MERGE SORTED ARRAY
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[k--] = nums1[i--];
+            } else {
+                nums1[k--] = nums2[j--];
+            }
+        }
+        while (j >= 0) {
+            nums1[k--] = nums2[j--];
+        }
+    }
+}
+
