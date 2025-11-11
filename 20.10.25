@@ -1,0 +1,113 @@
+1.Kth LARGEST ELEMENT
+
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq=new PriorityQueue<>();
+         
+           for( int i=0;i<k;i++){
+               pq.add(nums[i]);
+           }
+       for (int i = k; i < nums.length; i++) {
+            if (nums[i] > pq.peek()) {
+                pq.remove();
+                pq.add(nums[i]);   
+            }
+        }
+           return pq.peek();
+    }
+}
+
+2.Kth SMALLEST ELEMENT
+
+import java.util.*;
+
+class Solution {
+    public int kthSmallest(int[] arr, int k) {
+        // Max heap for k smallest elements
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        
+        for (int n : arr) {
+            pq.add(n);
+            if (pq.size() > k) pq.poll(); // remove largest
+        }
+
+        return pq.peek(); // kth smallest
+    }
+}
+
+3.IS BINARY HEAP TREE
+
+/*
+class Node {
+    int data;
+    Node left,right;
+    Node(int d){
+        data=d;
+        left=right=null;
+    }
+}
+*/
+
+class Solution {
+    public boolean isComplete(Node root) {
+        if (root == null) return true;
+
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        boolean end = false; // becomes true when we find the first null
+
+        while (!q.isEmpty()) {
+            Node curr = q.poll();
+
+            if (curr == null) {
+                end = true; // once null is found, all next must be null
+            } else {
+                if (end) return false; // found a node after null — not complete
+                q.add(curr.left);
+                q.add(curr.right);
+            }
+        }
+
+        return true;
+    }
+
+
+    public boolean isright(Node root){
+        if(root ==null) return true;
+        if (root.left != null && root.data < root.left.data) return false;
+       
+        if (root.right != null && root.data < root.right.data) return false;
+       
+        return isright(root.left) && isright(root.right);
+    }
+    public boolean isHeap(Node tree) {
+        // code here
+        return isright(tree) && isComplete(tree);
+        
+    }
+}
+
+4.TOP K FREQUENT ELEMENTS
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int num:nums){
+            map.put(num,map.getOrDefault(num,0)+1);
+        }
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> map.get(b)-map.get(a));
+        for(int key:map.keySet())
+          pq.add(key);
+
+        int[] ans=new int[k];
+        for(int i=0;i<k;i++)
+        { 
+        ans[i]=pq.peek();
+         pq.remove();
+        }
+        return ans;
+    }
+}
+
+
+sliding window maximum
