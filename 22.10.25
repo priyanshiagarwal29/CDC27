@@ -1,0 +1,51 @@
+1.PRINT ALL SUBSETS
+class Solution {
+           public static void recc(int i, List<List<Integer>> res,ArrayList<Integer> ans,int[] arr){
+             if(i>=arr.length) {
+            res.add(new ArrayList<>(ans));
+            return;
+        }
+        //take
+        ans.add(arr[i]);
+        recc(i+1,res,ans,arr);
+        //not take
+        ans.remove(ans.size()-1);
+        recc(i+1,res,ans,arr);
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        ArrayList<Integer> ans=new ArrayList<>();
+      List<List<Integer>> res=new ArrayList<>();
+      recc(0,res,ans,nums);
+      return res;
+    }
+}
+
+2.PERMUTATIONS
+class Solution {
+    List<List<Integer>> ans=new ArrayList<>();
+    HashSet<Integer> set=new HashSet<>();
+    public void solve(int[] nums, ArrayList<Integer> temp){
+        if(temp.size()==nums.length){
+            ans.add(new ArrayList<>(temp));
+            return;
+        }
+        for(int i=0;i<nums.length;i++){
+            if(!set.contains(nums[i])){
+                //do
+                set.add(nums[i]);
+                temp.add(nums[i]);
+                //explore
+                solve(nums,temp);
+                //undo
+                set.remove(nums[i]);
+                temp.remove(temp.get(temp.size()-1));
+
+            }
+        }
+    }
+    public List<List<Integer>> permute(int[] nums) {
+        ArrayList<Integer> temp=new ArrayList<>();
+        solve(nums,temp);
+        return ans;
+    }
+}
